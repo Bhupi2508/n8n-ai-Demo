@@ -1,4 +1,5 @@
 {
+  "id": "n8nAiWebhookDemo",
   "name": "My workflow",
   "nodes": [
     {
@@ -14,8 +15,7 @@
         -80
       ],
       "id": "2a02fbcd-7c6b-4674-a829-a96ed47e1029",
-      "name": "Webhook",
-      "webhookId": "e57679c0-682b-4f5a-a686-9c88fc9d3ffc"
+      "name": "Webhook"
     },
     {
       "parameters": {
@@ -42,13 +42,7 @@
         112
       ],
       "id": "216ce9ce-d69d-49ce-aae2-11c1477cac36",
-      "name": "OpenRouter Chat Model",
-      "credentials": {
-        "openRouterApi": {
-          "id": "eBojazSkqTF6kaha",
-          "name": "OpenRouter account"
-        }
-      }
+      "name": "OpenRouter Chat Model"
     },
     {
       "parameters": {
@@ -84,8 +78,8 @@
               "value": "={{$json[\"text\"]}}"
             },
             {
-              "name": "image",
-              "value": "https://m.media-amazon.com/images/G/01/poppin/DestinationPage/amazon-live-default.jpg"
+              "name": "requestId",
+              "value": "={{$json[\"requestId\"]}}"
             }
           ]
         },
@@ -115,7 +109,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const generatedData = $json[\"generatedData\"]; // from Code1\nconst imageURL = \"https://m.media-amazon.com/images/G/01/poppin/DestinationPage/amazon-live-default.jpg\" \n  // || $json[\"image\"]; // from AI\n\nreturn [{\n    text: generatedData,\n    image: imageURL,\n}];"
+        "jsCode": "const generatedData = $json[\"generatedData\"]; // from Code1\n// No image generation in this demo. Put an image URL here to show one in the UI.\nconst imageURL = \"\";\n\n// Echo the requestId from the webhook so the UI can match the answer to its question\nconst requestId = $('Webhook').first().json.body?.requestId || \"\";\n\nreturn [{\n    requestId,\n    text: generatedData,\n    image: imageURL,\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -138,13 +132,7 @@
         112
       ],
       "id": "de95da8b-eac3-4ec4-aa17-8e023e496f5e",
-      "name": "OpenRouter Chat Model1",
-      "credentials": {
-        "openRouterApi": {
-          "id": "eBojazSkqTF6kaha",
-          "name": "OpenRouter account"
-        }
-      }
+      "name": "OpenRouter Chat Model1"
     },
     {
       "parameters": {
@@ -204,30 +192,6 @@
       ],
       "id": "588d8eb9-d49d-4cf4-bf1a-0454738b30d3",
       "name": "When clicking ‘Execute workflow’"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://localhost:5678/webhook/testPrompt",
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "chatInput",
-              "value": "What are the futuristic technologies in IT in terms of growth and salary?"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -624,
-        -304
-      ],
-      "id": "aae2984d-57c4-4a65-acf3-86fbb9569109",
-      "name": "Call it on behalf of the backend"
     }
   ],
   "pinData": {},
@@ -336,17 +300,6 @@
         ]
       ]
     },
-    "Call it on behalf of the backend": {
-      "main": [
-        [
-          {
-            "node": "Sanitise Prompt",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "When clicking ‘Execute workflow’": {
       "main": [
         [
@@ -363,11 +316,6 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "2b30e63f-7f23-4f8a-971a-a708d087fd93",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "57a05081e58c89c388285c68b48f00918b86e1fedb6ea8baa844dcc61359521e"
-  },
-  "id": "WAgpFWBc2sbgQT1F",
+  "meta": {},
   "tags": []
 }

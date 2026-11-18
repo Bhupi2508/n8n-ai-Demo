@@ -1,27 +1,22 @@
 {
-  "name": "n8n",
-  "version": "1.0.0",
-  "description": "A local automation and AI workflow hub powered by n8n",
+  "name": "n8n-prompt-workflow-demo",
+  "version": "1.1.0",
+  "description": "Small Express app that sends prompts to an n8n webhook and shows the workflow's answer live in the browser.",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "node --test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bhupi2508/n8n-ai-workspace.git"
-  },
+  "engines": { "node": ">=18" },
+  "repository": { "type": "git", "url": "git+https://github.com/Bhupi2508/n8n-ai-workspace.git" },
   "author": "Bhupendra Singh",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Bhupi2508/n8n-ai-workspace/issues"
-  },
-  "homepage": "https://github.com/Bhupi2508/n8n-ai-workspace#readme",
+  "license": "MIT",
   "dependencies": {
-    "axios": "^1.11.0",
-    "body-parser": "^2.2.0",
-    "express": "^5.1.0",
-    "g": "^2.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.10"
   }
 }

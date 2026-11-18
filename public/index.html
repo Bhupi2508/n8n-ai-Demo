@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>n8n Prompt Workflow Demo</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="card">
+      <h1>n8n Prompt Workflow Demo</h1>
+      <p class="subtitle">Your question is sent to an n8n workflow; the answer appears below when it finishes.</p>
+
+      <form id="promptForm">
+        <label for="promptInput" class="sr-only">Your question</label>
+        <input id="promptInput" type="text" maxlength="500" placeholder="e.g. What is bitcoin?" autocomplete="off" required />
+        <button type="submit" id="submitBtn">Submit</button>
+      </form>
+
+      <section id="responseBox" aria-live="polite">
+        <p class="muted">No response yet.</p>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

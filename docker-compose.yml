@@ -1,24 +1,20 @@
-version: "3.8"
+# Runs n8n locally. The Node app runs separately with `npm start`.
 services:
   n8n:
-    # The docker image to use (official n8n)
     image: n8nio/n8n:latest
     container_name: n8n-local
     restart: unless-stopped
     ports:
-      - "5678:5678"
-
-    # Persist n8n data to the host './n8n_data' folder
+      - "127.0.0.1:5678:5678" # reachable from this machine only
     volumes:
-      - ./n8n_data:/home/node/.n8n
-    env_file:
-      - .env
-
-    # These configure n8n behavior.
+      - n8n_data:/home/node/.n8n
     environment:
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=${N8N_USER}
-      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD}
-      - N8N_PORT=5678
-      - N8N_HOST=localhost
-      - GENERIC_TIMEZONE=Asia/Kolkata
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE:-UTC}
+      - TZ=${GENERIC_TIMEZONE:-UTC}
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:-}
+    # Lets the workflow call http://host.docker.internal:3000 on Linux too
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  n8n_data:
